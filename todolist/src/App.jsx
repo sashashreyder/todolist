@@ -3,7 +3,6 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
-import RegistrationForm from './components/RegistrationForm';
 import TodoList from './components/TodoList';
 import RegisterModal from './components/RegisterModal';
 
@@ -11,6 +10,7 @@ function App() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
   const handleRegistration = () => {
     setIsRegistered(true);
@@ -25,8 +25,16 @@ function App() {
     setShowRegisterModal(false);
   };
 
+  const handleMarkAllDone = () => {
+    setTasks(tasks.map((task) => ({ ...task, completed: true })));
+  };
+
+  const handleClearAll = () => {
+    setTasks([]);
+  };
+
   useEffect(() => {
-    if (hasUnsavedChanges) {
+    if (hasUnsavedChanges && !showRegisterModal) {
       const handleBeforeUnload = (e) => {
         e.preventDefault();
         e.returnValue = 'You have unsaved changes. Do you really want to leave?';
@@ -35,26 +43,42 @@ function App() {
       window.addEventListener('beforeunload', handleBeforeUnload);
       return () => window.removeEventListener('beforeunload', handleBeforeUnload);
     }
-  }, [hasUnsavedChanges]);
+  }, [hasUnsavedChanges, showRegisterModal]);
 
   return (
     <div className="app-container">
       <Header onShowRegister={handleShowRegisterModal} />
       <div className="main-content">
-        <Sidebar />
+        <Sidebar 
+          tasks={tasks} 
+          onMarkAllDone={handleMarkAllDone} 
+          onClearAll={handleClearAll} 
+          onShowRegister={handleShowRegisterModal} 
+        />
         {!isRegistered ? (
           <div>
             <p className="try-notice">
               You're trying the app as a guest. Register to save your lists!
             </p>
-            <TodoList setHasUnsavedChanges={setHasUnsavedChanges} />
+            <TodoList 
+              tasks={tasks} 
+              setTasks={setTasks} 
+              setHasUnsavedChanges={setHasUnsavedChanges} 
+            />
           </div>
         ) : (
-          <TodoList setHasUnsavedChanges={setHasUnsavedChanges} />
+          <TodoList 
+            tasks={tasks} 
+            setTasks={setTasks} 
+            setHasUnsavedChanges={setHasUnsavedChanges} 
+          />
         )}
       </div>
       {showRegisterModal && (
-        <RegisterModal onClose={handleCloseRegisterModal} onRegister={handleRegistration} />
+        <RegisterModal 
+          onClose={handleCloseRegisterModal} 
+          onRegister={handleRegistration} 
+        />
       )}
       <Footer />
     </div>
@@ -62,4 +86,7 @@ function App() {
 }
 
 export default App;
+
+
+
 
