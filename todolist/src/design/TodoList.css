@@ -1,0 +1,134 @@
+.todo-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .task-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .task-form input {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+  }
+  
+  .task-form input:focus {
+    border-color: #4facfe;
+    outline: none;
+  }
+  
+  .task-form button {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .task-form button:hover {
+    background: linear-gradient(90deg, #00f2fe, #4facfe);
+  }
+  
+  .error-message {
+    color: #e63946;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    transition: background 0.3s ease;
+  }
+  
+  .task-item.completed span {
+    text-decoration: line-through;
+    color: #777;
+  }
+  
+  .task-item span {
+    flex: 1;
+    cursor: pointer;
+  }
+  
+  .task-item:hover {
+    background: #e3f2fd;
+  }
+  
+  .remove-btn {
+    background: none;
+    border: none;
+    color: #e63946;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .remove-btn:hover {
+    color: #ff6f61;
+  }
+  
+  .clear-btn {
+    background: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  
+  .clear-btn:hover {
+    background: #ff6f61;
+  }
+  
+  @media (max-width: 768px) {
+    .task-form input {
+      font-size: 0.9rem;
+    }
+  
+    .task-form button {
+      font-size: 0.9rem;
+    }
+  
+    .task-item {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+  
+  
