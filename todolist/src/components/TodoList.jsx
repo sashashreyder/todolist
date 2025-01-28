@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "../design/TodoList.css";
+
+const categories = [
+  { label: "Study", emoji: "🎓" },
+  { label: "Fitness", emoji: "🏋️‍♂️" },
+  { label: "Shopping", emoji: "🛒" },
+  { label: "Work", emoji: "📅" },
+  { label: "Personal", emoji: "🌟" },
+];
 
 const TodoList = ({ setHasUnsavedChanges }) => {
   const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState('');
-  const [error, setError] = useState('');
+  const [task, setTask] = useState("");
+  const [category, setCategory] = useState(categories[0].label);
+  const [error, setError] = useState("");
 
   const addTask = (e) => {
     e.preventDefault();
     if (!task.trim()) {
-      setError('Task cannot be empty!');
+      setError("Task cannot be empty!");
+      setTimeout(() => setError(""), 2000);
       return;
     }
-    setTasks([...tasks, { text: task, completed: false }]);
-    setTask('');
-    setError('');
-    if (setHasUnsavedChanges) setHasUnsavedChanges(true); // Mark progress as unsaved
+    setTasks([...tasks, { text: task, category, completed: false }]);
+    setTask("");
+    if (setHasUnsavedChanges) setHasUnsavedChanges(true);
   };
 
-  const toggleComplete = (index) => {
+  const markTaskAsDone = (index) => {
     const updatedTasks = tasks.map((t, i) =>
-      i === index ? { ...t, completed: !t.completed } : t
+      i === index ? { ...t, completed: true } : t
     );
     setTasks(updatedTasks);
     if (setHasUnsavedChanges) setHasUnsavedChanges(true);
@@ -28,11 +37,6 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
   const removeTask = (index) => {
     setTasks(tasks.filter((_, i) => i !== index));
-    if (setHasUnsavedChanges) setHasUnsavedChanges(true);
-  };
-
-  const clearTasks = () => {
-    setTasks([]);
     if (setHasUnsavedChanges) setHasUnsavedChanges(true);
   };
 
@@ -46,27 +50,53 @@ const TodoList = ({ setHasUnsavedChanges }) => {
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        <button type="submit">Add</button>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="category-select"
+        >
+          {categories.map((cat, index) => (
+            <option key={index} value={cat.label}>
+              {cat.emoji} {cat.label}
+            </option>
+          ))}
+        </select>
+        <button type="submit" className="add-btn">
+          Add
+        </button>
       </form>
       {error && <p className="error-message">{error}</p>}
       <ul className="task-list">
         {tasks.map((t, index) => (
-          <li key={index} className={`task-item ${t.completed ? 'completed' : ''}`}>
-            <span onClick={() => toggleComplete(index)}>{t.text}</span>
+          <li
+            key={index}
+            className={`task-item ${t.completed ? "completed" : ""}`}
+          >
+            <span>
+              {categories.find((cat) => cat.label === t.category)?.emoji}{" "}
+              {t.text}
+            </span>
+            {!t.completed && (
+              <button
+                className="mark-done-btn"
+                onClick={() => markTaskAsDone(index)}
+              >
+                Mark as Done
+              </button>
+            )}
             <button className="remove-btn" onClick={() => removeTask(index)}>
               ✖
             </button>
           </li>
         ))}
       </ul>
-      {tasks.length > 0 && (
-        <button className="clear-btn" onClick={clearTasks}>
-          Clear All
-        </button>
-      )}
     </div>
   );
 };
 
 export default TodoList;
+
+
+
+
 
