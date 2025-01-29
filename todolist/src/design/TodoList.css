@@ -1,6 +1,7 @@
 .todo-container {
     background: linear-gradient(135deg, #ffffff, #f0f8ff);
-    padding: 2rem;
+    padding: 20px;
+    padding-top: 0.5px;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     font-family: "Poppins", sans-serif;
@@ -15,7 +16,6 @@
   
   h2 {
     text-align: center;
-    margin-bottom: 1rem;
     color: #333;
     font-weight: bold;
   }
