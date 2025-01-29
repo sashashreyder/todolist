@@ -8,12 +8,19 @@
   max-width: 700px;
   text-align: left;
   margin: 30px auto;
+  padding: 10px 30px 10px 30px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .todo-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.task-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 /* ✅ Title */

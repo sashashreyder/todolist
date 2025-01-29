@@ -75,7 +75,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
             <span className="task-text">{t.text}</span>
             <div className="task-actions">
               <button className="done-btn" onClick={() => markTaskAsDone(index)}>
-                {t.completed ? "✅" : "✔"}
+                {t.completed ? "✔" : "✅"}
               </button>
               <button className="remove-btn" onClick={() => removeTask(index)}>❌</button>
             </div>
