@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensures left logo & right profile */
     align-items: center;
     padding: 1rem 2rem;
     background: linear-gradient(90deg, #4facfe, #00f2fe);
@@ -8,7 +8,6 @@
     font-family: 'Poppins', sans-serif;
     position: sticky;
     top: 0;
-    z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
 }
@@ -34,42 +33,34 @@
     letter-spacing: 0.5px;
 }
 
+/* Profile Button */
+.profile-container {
+    display: flex;
+    align-items: center;
+}
 
-.register-btn2 {
+.profile-btn {
     background: none;
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.register-btn:hover {
+.profile-btn:hover {
     color: #ffd700;
     transform: scale(1.1);
 }
 
-
 @media (max-width: 768px) {
     .header {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
         padding: 1rem;
     }
 
-    .header-nav {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .register-btn {
-        margin-top: 0.5rem;
+    .profile-container {
+        margin-left: auto; /* Push to right */
     }
 }
 
