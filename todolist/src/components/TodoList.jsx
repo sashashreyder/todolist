@@ -29,7 +29,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
   const markTaskAsDone = (index) => {
     const updatedTasks = tasks.map((t, i) =>
-      i === index ? { ...t, completed: true } : t
+      i === index ? { ...t, completed: !t.completed } : t
     );
     setTasks(updatedTasks);
     if (setHasUnsavedChanges) setHasUnsavedChanges(true);
@@ -68,25 +68,17 @@ const TodoList = ({ setHasUnsavedChanges }) => {
       {error && <p className="error-message">{error}</p>}
       <ul className="task-list">
         {tasks.map((t, index) => (
-          <li
-            key={index}
-            className={`task-item ${t.completed ? "completed" : ""}`}
-          >
-            <span>
-              {categories.find((cat) => cat.label === t.category)?.emoji}{" "}
-              {t.text}
+          <li key={index} className={`task-item ${t.completed ? "completed" : ""}`}>
+            <span className="task-emoji">
+              {categories.find((cat) => cat.label === t.category)?.emoji}
             </span>
-            {!t.completed && (
-              <button
-                className="mark-done-btn"
-                onClick={() => markTaskAsDone(index)}
-              >
-                Mark as Done
+            <span className="task-text">{t.text}</span>
+            <div className="task-actions">
+              <button className="done-btn" onClick={() => markTaskAsDone(index)}>
+                {t.completed ? "✅" : "✔"}
               </button>
-            )}
-            <button className="remove-btn" onClick={() => removeTask(index)}>
-              ✖
-            </button>
+              <button className="remove-btn" onClick={() => removeTask(index)}>❌</button>
+            </div>
           </li>
         ))}
       </ul>
@@ -95,6 +87,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 };
 
 export default TodoList;
+
 
 
 

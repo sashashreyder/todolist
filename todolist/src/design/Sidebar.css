@@ -22,15 +22,15 @@
   
   .toggle-btn {
     position: absolute;
-    top: 1rem;
-    right: -2.5rem;
+    top: 50px;
+    right: -80px;
     background: #00f2fe;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background 0.3s ease;
