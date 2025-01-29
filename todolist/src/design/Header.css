@@ -1,15 +1,25 @@
 .header {
     display: flex;
-    justify-content: space-between; /* Ensures left logo & right profile */
+    justify-content: center; 
     align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    padding: 1rem 1rem;
+    background: linear-gradient(90deg, #4facfe, #00f2fe, #36d1dc, #5b86e5);
+    background-size: 300% 300%;
+    animation: gradientAnimation 6s ease infinite; 
     color: white;
     font-family: 'Poppins', sans-serif;
     position: sticky;
-    top: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
+    margin: 20px 170px 30px 170px;
+    border: transparent;
+    border-radius: 50px;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .logo-container {
@@ -60,7 +70,7 @@
     }
 
     .profile-container {
-        margin-left: auto; /* Push to right */
+        margin-left: auto; 
     }
 }
 
