@@ -21,7 +21,7 @@
     font-size: 1.1rem;
     font-weight: 500;
     padding: 12px 24px;
-    border: 2px solid #ffffff;
+    border: 2px solid transparent;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -31,7 +31,6 @@
 }
 
 .register-btn:hover {
-    background: #ffffff;
     color: #ffffff;
     border-color: #2d4262;
     box-shadow: 6px 6px 6px #1a2a42;
