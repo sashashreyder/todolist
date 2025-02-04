@@ -4,12 +4,11 @@ import '../design/Header.css';
 const Header = ({ onShowRegister, isRegistered }) => {
   return (
     <header className="header">
-      <div className="logo-container">
-        <i className="fas fa-calendar-alt logo-icon" aria-hidden="true"></i>
-        <h1 className="header-title">My Daily Planner</h1>
+      <div className="header-bg">
+        <img src="https://i.postimg.cc/FH4v5W8R/headerpicture.png" alt="To-Do List Header" className="header-pic" />
       </div>
 
-      <div className="profile-container">
+      <div className="register-container">
         <button className="register-btn" onClick={onShowRegister}>
           {isRegistered ? "Profile" : "Register"}
         </button>
@@ -19,6 +18,7 @@ const Header = ({ onShowRegister, isRegistered }) => {
 };
 
 export default Header;
+
 
 
 

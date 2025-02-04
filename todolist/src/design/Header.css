@@ -1,83 +1,87 @@
 .header {
     display: flex;
+    position: relative;
+    left: 220px;
     justify-content: space-evenly;
     align-items: center;
-    margin: 0 auto;
-    padding: 16px 40px;
-    background: linear-gradient(90deg, #4facfe, #00f2fe, #36d1dc, #5b86e5);
-    background-size: 300% 300%;
-    animation: gradientAnimation 6s ease infinite; 
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    position: sticky;
-    top: 20px;
-    width: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-    border-radius: 50px;
+    flex-direction: row;
 }
 
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.logo-icon {
-    font-size: 32px;
-    margin-right: 10px;
-    transition: transform 0.3s ease;
-}
-
-.logo-icon:hover {
-    transform: scale(1.15);
-}
-
-.header-title {
-    font-size: clamp(24px, 3vw, 32px);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-.profile-container {
-    display: flex;
-    align-items: center;
+.header-pic {
+    width: 300px;
 }
 
 .register-btn {
-    margin: 0 !important;
-    background: #ffd700;
-    color: #333;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 25px;
+    position: relative;
+    left: 80px;
+    bottom: 50px;
+    background: #2d4262;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 12px 24px;
+    border: 2px solid #ffffff;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 6px #1a2a42;
 }
 
 .register-btn:hover {
-    background: #ffcc00;
-    transform: scale(1.05);
+    background: #ffffff;
+    color: #ffffff;
+    border-color: #2d4262;
+    box-shadow: 6px 6px 6px #1a2a42;
+    transform: translateY(-2px);
 }
+
+.register-btn:active {
+    transform: translateY(1px);
+    box-shadow: 2px 2px 0px #1a2a42;
+}
+
 
 @media (max-width: 768px) {
     .header {
-        flex-direction: row;
+        flex-direction: column;
+        text-align: center;
         padding: 16px;
     }
 
-    .logo-container {
-        justify-content: center;
+    .header-pic {
+        width: 220px;
     }
 
-    .profile-container {
-        margin-left: auto;
+    .register-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+        margin-top: 15px;
     }
 }
 
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+
+    .header-pic {
+        width: 180px;
+    }
+
+    .register-btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .register-btn {
+        font-size: 1.2rem;
+        padding: 14px 28px;
+        right: 50px;
+    }
+}
   
