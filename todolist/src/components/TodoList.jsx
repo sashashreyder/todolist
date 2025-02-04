@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../design/TodoList.css";
 
 const categories = [
-  { label: "Study", emoji: "🎓" },
-  { label: "Fitness", emoji: "🏋️‍♂️" },
+  { label: "Personal", emoji: "☺️" },
+  { label: "Work", emoji: "📅" },
   { label: "Shopping", emoji: "🛒" },
-  { label: "Work", emoji: "📅" }
+  { label: "Other", emoji: "🌍" }
 ];
 
 const TodoList = ({ setHasUnsavedChanges }) => {
