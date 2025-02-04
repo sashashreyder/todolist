@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "./design/App.css";
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
 import TodoList from './components/TodoList';
 import RegisterModal from './components/RegisterModal';
 
@@ -28,7 +27,6 @@ function App() {
     <div className="app-container">
       <Header onShowRegister={handleShowRegisterModal} isRegistered={isRegistered} />
       <div className="main-content">
-        <Sidebar onShowRegister={handleShowRegisterModal} />
         {!isRegistered ? (
           <div>
             <TodoList
