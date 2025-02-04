@@ -8,11 +8,10 @@ const Header = ({ onShowRegister, isRegistered }) => {
         <i className="fas fa-calendar-alt logo-icon" aria-hidden="true"></i>
         <h1 className="header-title">My Daily Planner</h1>
       </div>
-      
-      {/* Profile / Register Button */}
+
       <div className="profile-container">
-        <button className="profile-btn" onClick={onShowRegister} aria-label="Profile">
-          <i className={`fas ${isRegistered ? "fa-user" : "fa-user-plus"}`}></i>
+        <button className="register-btn" onClick={onShowRegister}>
+          {isRegistered ? "Profile" : "Register"}
         </button>
       </div>
     </header>
@@ -20,6 +19,8 @@ const Header = ({ onShowRegister, isRegistered }) => {
 };
 
 export default Header;
+
+
 
 
 

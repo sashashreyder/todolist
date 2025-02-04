@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "./design/App.css";
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import TodoList from './components/TodoList';
 import RegisterModal from './components/RegisterModal';
@@ -32,9 +31,6 @@ function App() {
         <Sidebar onShowRegister={handleShowRegisterModal} />
         {!isRegistered ? (
           <div>
-            <p className="try-notice">
-              You're trying the app as a guest. Register to save your lists!
-            </p>
             <TodoList
               tasks={tasks}
               setTasks={setTasks}
@@ -55,7 +51,6 @@ function App() {
           onRegister={handleRegistration}
         />
       )}
-      <Footer />
     </div>
   );
 }

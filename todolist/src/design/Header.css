@@ -1,18 +1,19 @@
 .header {
     display: flex;
-    justify-content: center; 
+    justify-content: space-evenly;
     align-items: center;
-    padding: 1rem 1rem;
+    margin: 0 auto;
+    padding: 16px 40px;
     background: linear-gradient(90deg, #4facfe, #00f2fe, #36d1dc, #5b86e5);
     background-size: 300% 300%;
     animation: gradientAnimation 6s ease infinite; 
     color: white;
     font-family: 'Poppins', sans-serif;
     position: sticky;
+    top: 20px;
+    width: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
-    margin: 20px 200px 30px 200px;
-    border: transparent;
     border-radius: 50px;
 }
 
@@ -28,8 +29,8 @@
 }
 
 .logo-icon {
-    font-size: 2rem;
-    margin-right: 0.5rem;
+    font-size: 32px;
+    margin-right: 10px;
     transition: transform 0.3s ease;
 }
 
@@ -38,39 +39,44 @@
 }
 
 .header-title {
-    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    font-size: clamp(24px, 3vw, 32px);
     font-weight: 700;
     letter-spacing: 0.5px;
 }
 
-/* Profile Button */
 .profile-container {
     display: flex;
     align-items: center;
 }
 
-.profile-btn {
-    background: none;
+.register-btn {
+    margin: 0 !important;
+    background: #ffd700;
+    color: #333;
+    padding: 10px 16px;
     border: none;
-    color: white;
-    font-size: 1.8rem;
+    border-radius: 25px;
     cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.profile-btn:hover {
-    color: #ffd700;
-    transform: scale(1.1);
+.register-btn:hover {
+    background: #ffcc00;
+    transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
     .header {
         flex-direction: row;
-        padding: 1rem;
+        padding: 16px;
+    }
+
+    .logo-container {
+        justify-content: center;
     }
 
     .profile-container {
-        margin-left: auto; 
+        margin-left: auto;
     }
 }
 
