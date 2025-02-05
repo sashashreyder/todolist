@@ -8,11 +8,10 @@ const Header = ({ onRegister, isRegistered }) => {
   return (
     <header className="header">
       <div className="header-bg">
-        <img
-          src="https://i.postimg.cc/FH4v5W8R/headerpicture.png"
-          alt="To-Do List Header"
-          className="header-pic"
-        />
+        <h1 className="logo">
+          <span className="top-text">easy to use</span>
+          <span className="main-text">TO-DO LIST</span>
+        </h1>
       </div>
       <div className="register-container">
         {!isRegistered && (
@@ -32,6 +31,7 @@ const Header = ({ onRegister, isRegistered }) => {
 };
 
 export default Header;
+
 
 
 
