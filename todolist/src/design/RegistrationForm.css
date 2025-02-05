@@ -12,7 +12,6 @@
   text-align: center;
 }
 
-/* Title */
 .registration-form h2 {
   font-size: 1.6rem;
   font-weight: 600;
@@ -20,7 +19,6 @@
   margin-bottom: 15px;
 }
 
-/* Form Inputs */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -42,7 +40,6 @@
   box-shadow: 0 0 8px rgba(79, 172, 254, 0.4);
 }
 
-/* Register Button */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -59,6 +56,12 @@
 .submit-btn:hover {
   background: linear-gradient(90deg, #00f2fe, #4facfe);
   transform: translateY(-2px);
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
 }
 
 

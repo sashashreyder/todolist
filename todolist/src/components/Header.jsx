@@ -14,7 +14,6 @@ const Header = ({ onRegister, isRegistered }) => {
           className="header-pic"
         />
       </div>
-
       <div className="register-container">
         {!isRegistered && (
           <button className="register-btn" onClick={() => setShowRegister(true)}>
@@ -22,9 +21,12 @@ const Header = ({ onRegister, isRegistered }) => {
           </button>
         )}
       </div>
-
-      {/* ✅ Render modal only if showRegister is true */}
-      {showRegister && <RegisterModal onClose={() => setShowRegister(false)} onRegister={onRegister} />}
+      {showRegister && (
+        <RegisterModal
+          onClose={() => setShowRegister(false)}
+          onRegister={onRegister}
+        />
+      )}
     </header>
   );
 };

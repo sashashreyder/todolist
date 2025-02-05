@@ -1,3 +1,4 @@
+/* App.css — глобальные стили и стили контейнера приложения */
 #root {
   text-align: center;
 }
@@ -10,4 +11,16 @@ html,
   background: linear-gradient(90deg, #2d4262, #3b5b7c, #4a7597, #5b8fb4);
   background-size: 200% 200%;
 }
+
+/* Если нужно, можно добавить стили для контейнера приложения */
+.app-container {
+  /* Пример: */
+  min-height: 100vh;
+}
+
+.main-content {
+  /* Стили для основного контента */
+  padding: 20px;
+}
+
 

@@ -6,7 +6,7 @@ import TodoList from "./components/TodoList";
 function App() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState({});
 
   const handleRegistration = () => {
     setIsRegistered(true);
@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* ✅ Let Header handle the Register Modal */}
       <Header onRegister={handleRegistration} isRegistered={isRegistered} />
       <div className="main-content">
         <TodoList
@@ -28,6 +27,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
