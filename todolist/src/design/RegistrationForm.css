@@ -1,84 +1,48 @@
-/* ✅ Background Blur Effect */
-.registration-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* Darker overlay */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  backdrop-filter: blur(6px);
-}
-
-/* ✅ Registration Box */
 .registration-form {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   background: white;
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
   font-family: "Poppins", sans-serif;
   text-align: center;
 }
 
-/* ✅ Close Button */
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #ff5c5c;
-  color: white;
-  border: none;
-  font-size: 18px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.close-btn:hover {
-  background: #e63946;
-  transform: scale(1.1);
-}
-
-/* ✅ Title */
+/* Title */
 .registration-form h2 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #333;
-  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-/* ✅ Form Groups */
+/* Form Inputs */
 .form-group {
-  margin-bottom: 1rem;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* ✅ Input Fields */
 .form-group input {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 2px solid #ddd;
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group input:focus {
   border-color: #4facfe;
-  box-shadow: 0 0 6px rgba(79, 172, 254, 0.5);
+  box-shadow: 0 0 8px rgba(79, 172, 254, 0.4);
 }
 
-/* ✅ Register Button */
+/* Register Button */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -94,18 +58,7 @@
 
 .submit-btn:hover {
   background: linear-gradient(90deg, #00f2fe, #4facfe);
-  transform: scale(1.05);
-}
-
-/* ✅ Responsive Fixes */
-@media (max-width: 768px) {
-  .registration-form {
-    padding: 1.5rem;
-  }
-
-  .registration-form h2 {
-    font-size: 1.25rem;
-  }
+  transform: translateY(-2px);
 }
 
 

@@ -3,7 +3,7 @@ import "../design/TodoList.css";
 
 const categories = [
   { label: "Personal", emoji: "☺️" },
-  { label: "Work", emoji: "📅" },
+  { label: "Work", emoji: "🖥️" },
   { label: "Shopping", emoji: "🛒" },
   { label: "Other", emoji: "🌍" }
 ];

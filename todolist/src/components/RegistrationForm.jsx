@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../design/RegistrationForm.css";
 
-const RegistrationForm = ({ onRegister, onClose }) => {
+const RegistrationForm = ({ onRegister }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,57 +27,51 @@ const RegistrationForm = ({ onRegister, onClose }) => {
   };
 
   return (
-    <div className="registration-form-container">
-      <div className="registration-form">
-        {/* Close Button Inside */}
-        <button className="close-btn" onClick={onClose}>
-          ✖
-        </button>
-        
-        <h2>Register to Save Your Lists</h2>
-        {error && <p className="error-message">{error}</p>}
+    <form className="registration-form" onSubmit={handleSubmit}>
+      <h2>Register to Save Your Lists</h2>
+      {error && <p className="error-message">{error}</p>}
 
-        <div className="form-group">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter your name"
-          />
-        </div>
-
-        <div className="form-group">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-          />
-        </div>
-
-        <div className="form-group">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Create a password"
-          />
-        </div>
-
-        <button type="submit" className="submit-btn" onClick={handleSubmit}>
-          Register
-        </button>
+      <div className="form-group">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Enter your name"
+        />
       </div>
-    </div>
+
+      <div className="form-group">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div className="form-group">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Create a password"
+        />
+      </div>
+
+      <button type="submit" className="submit-btn">
+        Register
+      </button>
+    </form>
   );
 };
 
 export default RegistrationForm;
+
 
 
