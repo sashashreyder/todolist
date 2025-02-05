@@ -14,13 +14,11 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [category, setCategory] = useState(categories[0].label);
   const [error, setError] = useState("");
 
-  // Load tasks from local storage
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
     setTasks(savedTasks);
   }, []);
 
-  // Save tasks to local storage when updated
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     if (setHasUnsavedChanges) setHasUnsavedChanges(true);

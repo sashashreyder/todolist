@@ -77,13 +77,11 @@ h2 {
   flex: 1;
 }
 
-/* ✅ Apply strikethrough when completed */
 .task-item.completed .task-text {
   text-decoration: line-through;
   color: #999;
 }
 
-/* ✅ Task Actions (Now Centered!) */
 .task-actions {
   display: flex;
   gap: 10px;
