@@ -42,7 +42,6 @@
   box-shadow: 2px 2px 0px rgba(26, 42, 66, 0.6);
 }
 
-/* ✅ Medium Screens (Tablets & Small Laptops) */
 @media (max-width: 1024px) {
   .header {
     flex-direction: column;
@@ -59,7 +58,6 @@
   }
 }
 
-/* ✅ Mobile Screens */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -78,7 +76,6 @@
   }
 }
 
-/* ✅ Very Small Screens (Phones) */
 @media (max-width: 480px) {
   .header {
     padding: 12px;
@@ -93,7 +90,6 @@
   }
 }
 
-/* ✅ Large Screens (Desktops) */
 @media (min-width: 1400px) {
   .header {
     padding: 40px;

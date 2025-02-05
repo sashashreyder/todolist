@@ -22,9 +22,8 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [tasks, setTasks] = useState(getStoredTasks);
   const [collapsed, setCollapsed] = useState(() => {
     const stored = getStoredVisibility();
-    // Если данных в localStorage нет, категории открыты по умолчанию
     return categories.reduce((acc, cat) => {
-      acc[cat.label] = stored[cat.label] ?? false; // По дефолту false (открыто)
+      acc[cat.label] = stored[cat.label] ?? false;
       return acc;
     }, {});
   });
