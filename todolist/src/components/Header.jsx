@@ -13,11 +13,9 @@ const Header = ({ onRegister, isRegistered }) => {
           <span className="main-text">TO-DO LIST</span>
         </h1>
         {!isRegistered && (
-          <div className="register-container">
-            <button className="register-btn" onClick={() => setShowRegister(true)}>
-              Register
-            </button>
-          </div>
+          <button className="register-btn" onClick={() => setShowRegister(true)}>
+            Register
+          </button>
         )}
       </div>
       {showRegister && (
@@ -31,6 +29,7 @@ const Header = ({ onRegister, isRegistered }) => {
 };
 
 export default Header;
+
 
 
 

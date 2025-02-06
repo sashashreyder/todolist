@@ -6,28 +6,22 @@
   padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative;
 }
 
 .header-bg {
-  width: 100%;
+  width: 70%;
   text-align: center;
-  padding: 40px 0;
   background: linear-gradient(135deg, #153061, #2d4262);
   border-radius: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px 60px;
+  padding: 40px 20px;
 }
 
 .logo {
   font-family: 'Bungee', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  text-align: center;
   position: relative;
   line-height: 1.2;
   margin: 0 auto;
@@ -39,7 +33,7 @@
   font-size: 18px;
   font-weight: 500;
   color: #ff6534;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   font-family: 'Playfair Display', serif;
 }
@@ -55,50 +49,41 @@
   display: inline-block;
 }
 
-.register-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .register-btn {
-  background: #ff914d;
+  background: #c4855f;
   color: #ffffff;
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 12px 20px;
+  padding: 12px 14px;
   border: 2px solid transparent;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 4px 4px 6px rgba(26, 42, 66, 0.4);
+  margin-top: 20px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, 
+              box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .register-btn:hover {
-  color: #ffffff;
-  border-color: #ff914d;
+  background: #ffdbac;
+  color: #1e1d1d;
+  border-color: transparent;
   box-shadow: 6px 6px 6px rgba(26, 42, 66, 0.6);
-  transform: translateY(-2px);
 }
 
+/* ✅ Smooth scale effect on click */
 .register-btn:active {
-  transform: translateY(1px);
   box-shadow: 2px 2px 0px rgba(26, 42, 66, 0.6);
+  transform: scale(1.05); /* Slightly enlarges the button */
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .logo .main-text {
-    font-size: 40px;
+    font-size: 46px;
   }
   .register-btn {
-    font-size: 18px;
+    font-size: 20px;
     padding: 10px 18px;
   }
 }
