@@ -12,7 +12,7 @@ const RegisterModal = ({ onClose, onRegister }) => {
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal">
         <button className="close-btn" onClick={onClose}>❌</button>
-        <h2>Register to Save Your Lists</h2>
+        <h2 className="saveYourList">Register to Save Your Lists</h2>
         <form className="registration-form" onSubmit={onRegister} onClick={(e) => e.stopPropagation()}>
           <div className="form-group">
             <input type="text" name="name" placeholder="Enter your name" required />
