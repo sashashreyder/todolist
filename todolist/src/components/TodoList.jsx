@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebaseConfig"; 
+import { db } from "../firebaseConfig";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import Confetti from "react-confetti";
 import "../design/TodoList.css";
 
 const categories = [
@@ -28,6 +29,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [task, setTask] = useState("");
   const [category, setCategory] = useState(categories[0].label);
   const [error, setError] = useState("");
+  const [confettiActive, setConfettiActive] = useState(false);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -87,6 +89,10 @@ const TodoList = ({ setHasUnsavedChanges }) => {
         i === index ? { ...t, completed: !t.completed } : t
       )
     }));
+
+    // 🎉 Activate confetti effect when task is completed
+    setConfettiActive(true);
+    setTimeout(() => setConfettiActive(false), 4000); // Confetti lasts longer
   };
 
   const removeTask = async (cat, index) => {
@@ -99,8 +105,13 @@ const TodoList = ({ setHasUnsavedChanges }) => {
     }));
   };
 
+  // ✅ Check if there are no tasks left in all categories
+  const isTaskListEmpty = Object.values(tasks).every((taskArray) => taskArray.length === 0);
+
   return (
     <div className="todo-container">
+      {confettiActive && <Confetti numberOfPieces={300} />} {/* 🎉 More confetti */}
+      
       <form className="task-form" onSubmit={addTask}>
         <input
           type="text"
@@ -125,6 +136,9 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
       {error && <p className="error-message">{error}</p>}
 
+      {/* ✅ Display "No tasks for today!" if task list is empty */}
+      {isTaskListEmpty && <p className="no-tasks">🎉 No tasks for today! Enjoy your time! 🎉</p>}
+
       <div className="task-grid">
         {categories.map((cat) => (
           <div key={cat.label} className="task-column">
@@ -143,7 +157,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
                       <button className="done-btn" onClick={() => markTaskAsDone(cat.label, index)}>
                         {t.completed ? "✔️" : "✅"}
                       </button>
-                      <button className="remove-btn" onClick={() => removeTask(cat.label, index)}>
+                      <button className="remove-btn shake" onClick={() => removeTask(cat.label, index)}>
                         🗑️
                       </button>
                     </div>
@@ -159,6 +173,8 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 };
 
 export default TodoList;
+
+
 
 
 
