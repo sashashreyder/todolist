@@ -30,6 +30,10 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [category, setCategory] = useState(categories[0].label);
   const [error, setError] = useState("");
   const [confettiActive, setConfettiActive] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -51,6 +55,14 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   useEffect(() => {
     localStorage.setItem("collapsedCategories", JSON.stringify(collapsed));
   }, [collapsed]);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleCategory = (cat) => {
     setCollapsed((prev) => {
@@ -90,9 +102,9 @@ const TodoList = ({ setHasUnsavedChanges }) => {
       )
     }));
 
-
+    // 🎉 Activate confetti effect when task is completed
     setConfettiActive(true);
-    setTimeout(() => setConfettiActive(false), 4000); 
+    setTimeout(() => setConfettiActive(false), 5000);
   };
 
   const removeTask = async (cat, index) => {
@@ -105,13 +117,22 @@ const TodoList = ({ setHasUnsavedChanges }) => {
     }));
   };
 
-
   const isTaskListEmpty = Object.values(tasks).every((taskArray) => taskArray.length === 0);
 
   return (
     <div className="todo-container">
-      {confettiActive && <Confetti numberOfPieces={350} />} 
-      
+      {confettiActive && (
+        <Confetti
+          width={windowSize.width}
+          height={windowSize.height}
+          numberOfPieces={400} 
+          gravity={0.2} 
+          wind={0.025} 
+          tweenDuration={8000} 
+          recycle={false} 
+        />
+      )}
+
       <form className="task-form" onSubmit={addTask}>
         <input
           type="text"
