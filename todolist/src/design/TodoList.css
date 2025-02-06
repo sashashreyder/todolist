@@ -1,11 +1,10 @@
 .todo-container {
-  padding: 20px;
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
   max-width: 70%;
   text-align: center;
-  margin: 40px auto;
+  margin: 0 auto;
 }
 
 .task-item {
