@@ -29,7 +29,6 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [category, setCategory] = useState(categories[0].label);
   const [error, setError] = useState("");
 
-  // Fetch tasks from Firestore
   useEffect(() => {
     const fetchTasks = async () => {
       const querySnapshot = await getDocs(collection(db, "tasks"));
@@ -102,7 +101,6 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
   return (
     <div className="todo-container">
-      <h2>MY TASKS</h2>
       <form className="task-form" onSubmit={addTask}>
         <input
           type="text"
