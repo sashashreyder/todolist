@@ -90,9 +90,9 @@ const TodoList = ({ setHasUnsavedChanges }) => {
       )
     }));
 
-    // 🎉 Activate confetti effect when task is completed
+
     setConfettiActive(true);
-    setTimeout(() => setConfettiActive(false), 4000); // Confetti lasts longer
+    setTimeout(() => setConfettiActive(false), 4000); 
   };
 
   const removeTask = async (cat, index) => {
@@ -105,12 +105,12 @@ const TodoList = ({ setHasUnsavedChanges }) => {
     }));
   };
 
-  // ✅ Check if there are no tasks left in all categories
+
   const isTaskListEmpty = Object.values(tasks).every((taskArray) => taskArray.length === 0);
 
   return (
     <div className="todo-container">
-      {confettiActive && <Confetti numberOfPieces={300} />} {/* 🎉 More confetti */}
+      {confettiActive && <Confetti numberOfPieces={350} />} 
       
       <form className="task-form" onSubmit={addTask}>
         <input
@@ -136,7 +136,6 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
       {error && <p className="error-message">{error}</p>}
 
-      {/* ✅ Display "No tasks for today!" if task list is empty */}
       {isTaskListEmpty && <p className="no-tasks">🎉 No tasks for today! Enjoy your time! 🎉</p>}
 
       <div className="task-grid">

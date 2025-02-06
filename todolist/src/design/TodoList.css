@@ -1,6 +1,3 @@
-/* ========================= */
-/* ✅ General To-Do List Container */
-/* ========================= */
 .todo-container {
   border-radius: 20px;
   font-family: "Poppins", sans-serif;
@@ -10,9 +7,6 @@
   margin-bottom: 60px;
 }
 
-/* ========================= */
-/* ✅ Task Item Styling */
-/* ========================= */
 .task-item {
   display: flex;
   justify-content: space-between;
@@ -48,9 +42,6 @@
   }
 }
 
-/* ========================= */
-/* ✅ Task Form (Input + Button) */
-/* ========================= */
 .task-form {
   display: flex;
   align-items: center;
@@ -79,9 +70,6 @@
   cursor: pointer;
 }
 
-/* ========================= */
-/* ✅ Add Button Styling */
-/* ========================= */
 .add-btn {
   background: #1f3b73;
   color: white;
@@ -99,9 +87,6 @@
   background: #153061;
 }
 
-/* ========================= */
-/* ✅ Task Grid & Columns */
-/* ========================= */
 .task-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -132,18 +117,12 @@
   cursor: pointer;
 }
 
-/* ========================= */
-/* ✅ Task List Styling */
-/* ========================= */
 .task-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* ========================= */
-/* ✅ Task Text Wrapping */
-/* ========================= */
 .task-text {
   font-size: 16px;
   font-weight: 500;
@@ -156,23 +135,16 @@
   max-width: 80%;
 }
 
-/* ========================= */
-/* ✅ Completed Task Styling */
-/* ========================= */
 .task-item.completed .task-text {
   text-decoration: line-through;
   color: #999;
 }
 
-/* ========================= */
-/* ✅ Task Actions (Buttons) */
-/* ========================= */
 .task-actions {
   display: flex;
   gap: 12px;
 }
 
-/* ✅ Mark as Done Button */
 .done-btn {
   background: none;
   border: none;
@@ -186,9 +158,6 @@
   color: #16a085;
 }
 
-/* ========================= */
-/* ✅ Remove Button (Shaking Trash) */
-/* ========================= */
 .remove-btn {
   background: none;
   border: none;
@@ -209,9 +178,6 @@
   75% { transform: translateX(-3px); }
 }
 
-/* ========================= */
-/* ✅ Confetti Animation (Longer Duration) */
-/* ========================= */
 .confetti-container {
   position: fixed;
   top: 0;
@@ -222,19 +188,31 @@
   z-index: 9999;
 }
 
-/* ========================= */
-/* ✅ Responsive Adjustments */
-/* ========================= */
 @media (max-width: 1024px) {
   .todo-container {
     padding: 20px;
     max-width: 90%;
   }
+
   .task-grid {
     grid-template-columns: repeat(1, 1fr);
   }
+
   .task-input {
     width: 100%;
+  }
+
+  .task-text {
+    font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+    padding: 12px;
   }
 }
 
@@ -243,11 +221,25 @@
     flex-direction: column;
     align-items: center;
   }
+
   .task-grid {
     gap: 15px;
   }
+
   .task-column {
     padding: 15px;
+  }
+
+  .task-text {
+    font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+    padding: 10px;
   }
 }
 
@@ -255,15 +247,31 @@
   .todo-container {
     padding: 15px;
   }
+
   .task-input,
   .category-select,
   .add-btn {
     text-align: center;
   }
+
   .add-btn {
     padding: 12px;
   }
+
+  .task-text {
+    font-size: 13px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
 }
+
+
 
 
 
