@@ -95,7 +95,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
   return (
     <div className="todo-container">
-      <h2>My Tasks</h2>
+      <h2>MY TASKS</h2>
       <form className="task-form" onSubmit={addTask}>
         <input
           type="text"

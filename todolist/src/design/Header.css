@@ -55,8 +55,8 @@
 
 .register-btn {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: 75px;
+  right: 60px;
   background: #ff914d;
   color: #ffffff;
   font-family: 'Playfair Display', serif;
@@ -89,10 +89,9 @@
     font-size: 40px;
   }
   .register-btn {
-    font-size: 16px;
-    padding: 10px 18px;
-    top: 15px;
-    right: 20px;
+    position: absolute;
+    top: 80px;
+    right: 90px;
   }
 }
 
@@ -100,28 +99,40 @@
   .logo .main-text {
     font-size: 32px;
   }
+  
   .register-btn {
-    font-size: 15px;
-    padding: 8px 16px;
-    top: 12px;
-    right: 15px;
-  }
+    font-size: 20px;
+    padding: 10px 16px;
+    position: absolute;
+    top: 190px;
+    right: 265px;
+}
 }
 
 @media (max-width: 480px) {
   .logo .main-text {
     font-size: 28px;
   }
+
   .register-btn {
-    font-size: 14px;
-    padding: 7px 14px;
+    position: absolute;
+    top: 190px;
+    right: 165px;
+    font-size: 18px;
+    padding: 8px 14px;
     border-radius: 8px;
-    top: 10px;
-    right: 10px;
+    
   }
 }
 
 @media (min-width: 1400px) {
+  .register-btn {
+    font-size: 20px;
+    padding: 14px 24px;
+    top: 30px;
+    right: 40px;
+  }
+
   .logo .main-text {
     font-size: 54px;
   }
