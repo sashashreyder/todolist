@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { db } from "../firebaseConfig"; 
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import "../design/TodoList.css";
 
 const categories = [
@@ -9,17 +11,12 @@ const categories = [
 ];
 
 const TodoList = ({ setHasUnsavedChanges }) => {
-  const getStoredTasks = () => {
-    const savedTasks = localStorage.getItem("tasks");
-    return savedTasks ? JSON.parse(savedTasks) : {};
-  };
-
   const getStoredVisibility = () => {
     const savedVisibility = localStorage.getItem("collapsedCategories");
     return savedVisibility ? JSON.parse(savedVisibility) : {};
   };
 
-  const [tasks, setTasks] = useState(getStoredTasks);
+  const [tasks, setTasks] = useState({});
   const [collapsed, setCollapsed] = useState(() => {
     const stored = getStoredVisibility();
     return categories.reduce((acc, cat) => {
@@ -32,10 +29,23 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [category, setCategory] = useState(categories[0].label);
   const [error, setError] = useState("");
 
+  // Fetch tasks from Firestore
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    if (setHasUnsavedChanges) setHasUnsavedChanges(true);
-  }, [tasks]);
+    const fetchTasks = async () => {
+      const querySnapshot = await getDocs(collection(db, "tasks"));
+      const taskList = {};
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (!taskList[data.category]) {
+          taskList[data.category] = [];
+        }
+        taskList[data.category].push({ id: doc.id, text: data.text, completed: data.completed });
+      });
+      setTasks(taskList);
+    };
+
+    fetchTasks();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("collapsedCategories", JSON.stringify(collapsed));
@@ -49,7 +59,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
     });
   };
 
-  const addTask = (e) => {
+  const addTask = async (e) => {
     e.preventDefault();
     if (!task.trim()) {
       setError("Task cannot be empty!");
@@ -57,40 +67,37 @@ const TodoList = ({ setHasUnsavedChanges }) => {
       return;
     }
 
-    setTasks((prevTasks) => {
-      const updatedTasks = {
-        ...prevTasks,
-        [category]: [...(prevTasks[category] || []), { text: task, completed: false }]
-      };
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      return updatedTasks;
-    });
+    const newTask = { text: task, completed: false, category };
+    const docRef = await addDoc(collection(db, "tasks"), newTask);
+
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [category]: [...(prevTasks[category] || []), { id: docRef.id, ...newTask }]
+    }));
 
     setTask("");
   };
 
-  const markTaskAsDone = (cat, index) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = {
-        ...prevTasks,
-        [cat]: prevTasks[cat].map((t, i) =>
-          i === index ? { ...t, completed: !t.completed } : t
-        )
-      };
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      return updatedTasks;
-    });
+  const markTaskAsDone = async (cat, index) => {
+    const taskToUpdate = tasks[cat][index];
+    await updateDoc(doc(db, "tasks", taskToUpdate.id), { completed: !taskToUpdate.completed });
+
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [cat]: prevTasks[cat].map((t, i) =>
+        i === index ? { ...t, completed: !t.completed } : t
+      )
+    }));
   };
 
-  const removeTask = (cat, index) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = {
-        ...prevTasks,
-        [cat]: prevTasks[cat].filter((_, i) => i !== index)
-      };
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      return updatedTasks;
-    });
+  const removeTask = async (cat, index) => {
+    const taskToDelete = tasks[cat][index];
+    await deleteDoc(doc(db, "tasks", taskToDelete.id));
+
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [cat]: prevTasks[cat].filter((_, i) => i !== index)
+    }));
   };
 
   return (
@@ -132,7 +139,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
             {!collapsed[cat.label] && (
               <ul className="task-list">
                 {(tasks[cat.label] || []).map((t, index) => (
-                  <li key={index} className={`task-item ${t.completed ? "completed" : ""}`}>
+                  <li key={t.id} className={`task-item ${t.completed ? "completed" : ""}`}>
                     <span className="task-text">{t.text}</span>
                     <div className="task-actions">
                       <button className="done-btn" onClick={() => markTaskAsDone(cat.label, index)}>
@@ -154,6 +161,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 };
 
 export default TodoList;
+
 
 
 
