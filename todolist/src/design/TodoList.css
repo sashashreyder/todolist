@@ -202,17 +202,24 @@
     width: 100%;
   }
 
-  .task-text {
-    font-size: 14px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    max-width: 100%;
-  }
-
   .task-item {
     flex-wrap: wrap;
     padding: 12px;
+  }
+
+  .task-text {
+    font-size: 14px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .task-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 }
 
@@ -230,16 +237,24 @@
     padding: 15px;
   }
 
-  .task-text {
-    font-size: 14px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-  }
-
   .task-item {
     flex-wrap: wrap;
     padding: 10px;
+  }
+
+  .task-text {
+    font-size: 14px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .task-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 }
 
@@ -258,18 +273,27 @@
     padding: 12px;
   }
 
-  .task-text {
-    font-size: 13px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-  }
-
   .task-item {
     flex-wrap: wrap;
     padding: 10px;
   }
+
+  .task-text {
+    font-size: 13px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .task-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
 }
+
 
 
 
