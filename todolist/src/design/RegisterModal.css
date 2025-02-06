@@ -12,6 +12,11 @@
   backdrop-filter: blur(5px);
 }
 
+.register-btn-container {
+  display: flex;
+  align-items: center;
+}
+
 .modal {
   position: relative;
   background: rgb(239, 185, 120);

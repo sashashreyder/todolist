@@ -1,10 +1,9 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 20px;
+  flex-direction: column;
+  padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -12,13 +11,16 @@
 
 .header-bg {
   width: 100%;
-  height: auto;
   text-align: center;
   padding: 40px 0;
   background: linear-gradient(135deg, #153061, #2d4262);
   border-radius: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 60px;
 }
 
 .logo {
@@ -53,10 +55,17 @@
   display: inline-block;
 }
 
-.register-btn {
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   position: absolute;
-  top: 75px;
   right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.register-btn {
   background: #ff914d;
   color: #ffffff;
   font-family: 'Playfair Display', serif;
@@ -89,24 +98,34 @@
     font-size: 40px;
   }
   .register-btn {
-    position: absolute;
-    top: 80px;
-    right: 90px;
+    font-size: 18px;
+    padding: 10px 18px;
   }
 }
 
 @media (max-width: 768px) {
+  .header-bg {
+    flex-direction: column;
+    padding: 30px 40px;
+  }
+
   .logo .main-text {
     font-size: 32px;
   }
-  
+
+  .register-container {
+    position: relative;
+    top: 10px;
+    right: 0;
+    transform: none;
+    justify-content: center;
+  }
+
   .register-btn {
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px 16px;
-    position: absolute;
-    top: 190px;
-    right: 265px;
-}
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -114,35 +133,37 @@
     font-size: 28px;
   }
 
+  .register-container {
+    position: relative;
+    top: 5px;
+    right: 0;
+    transform: none;
+    justify-content: center;
+  }
+
   .register-btn {
-    position: absolute;
-    top: 190px;
-    right: 165px;
-    font-size: 18px;
+    font-size: 14px;
     padding: 8px 14px;
-    border-radius: 8px;
-    
   }
 }
 
 @media (min-width: 1400px) {
+  .register-container {
+    right: 40px;
+    top: 50%;
+  }
+
   .register-btn {
     font-size: 20px;
     padding: 14px 24px;
-    top: 30px;
-    right: 40px;
   }
 
   .logo .main-text {
     font-size: 54px;
   }
-  .register-btn {
-    font-size: 1.2rem;
-    padding: 14px 28px;
-    top: 30px;
-    right: 40px;
-  }
 }
+
+
 
 
   

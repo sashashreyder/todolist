@@ -23,7 +23,9 @@ const RegisterModal = ({ onClose, onRegister }) => {
           <div className="form-group">
             <input type="password" name="password" placeholder="Create a password" required />
           </div>
+          <div className="register-btn-container">
           <button type="submit" className="submit-btn">Register</button>
+          </div>
         </form>
       </div>
     </div>
