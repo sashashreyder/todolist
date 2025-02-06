@@ -72,10 +72,9 @@
   box-shadow: 6px 6px 6px rgba(26, 42, 66, 0.6);
 }
 
-/* ✅ Smooth scale effect on click */
 .register-btn:active {
   box-shadow: 2px 2px 0px rgba(26, 42, 66, 0.6);
-  transform: scale(1.05); /* Slightly enlarges the button */
+  transform: scale(1.05); 
 }
 
 @media (max-width: 1200px) {
