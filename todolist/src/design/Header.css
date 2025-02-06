@@ -115,6 +115,7 @@
 @media (max-width: 480px) {
   .logo .main-text {
     font-size: 28px;
+    margin-top: 10px;
   }
 
   .register-container {
