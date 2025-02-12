@@ -5,10 +5,19 @@ import Confetti from "react-confetti";
 import "../design/TodoList.css";
 
 const categories = [
-  { label: "Personal", emoji: "💼" },
-  { label: "Work", emoji: "🚀" },
-  { label: "Shopping", emoji: "🛍️" },
-  { label: "Health", emoji: "🏃" }
+  { label: "Personal", emoji: "💼", color: "#ff914d" },
+  { label: "Work", emoji: "🚀", color: "#1f3b73" },
+  { label: "Shopping", emoji: "🛍️", color: "#ffcc00" },
+  { label: "Health", emoji: "🏃", color: "#16a085" },
+  { label: "Hobbies", emoji: "🎨", color: "#9b59b6" },
+  { label: "Finance", emoji: "💰", color: "#f39c12" },
+  { label: "Family", emoji: "👨‍👩‍👧‍👦", color: "#e67e22" }
+];
+
+const priorities = [
+  { label: "Low", color: "#27ae60" },
+  { label: "Medium", color: "#f1c40f" },
+  { label: "High", color: "#e74c3c" }
 ];
 
 const TodoList = ({ setHasUnsavedChanges }) => {
@@ -20,14 +29,15 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   const [tasks, setTasks] = useState({});
   const [collapsed, setCollapsed] = useState(() => {
     const stored = getStoredVisibility();
-    return categories.reduce((acc, cat) => {
-      acc[cat.label] = stored[cat.label] ?? false;
+    return categories.reduce((acc, category) => {
+      acc[category.label] = stored[category.label] ?? false;
       return acc;
     }, {});
   });
 
-  const [task, setTask] = useState("");
-  const [category, setCategory] = useState(categories[0].label);
+  const [taskText, setTaskText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].label);
+  const [selectedPriority, setSelectedPriority] = useState(priorities[0].label);
   const [error, setError] = useState("");
   const [confettiActive, setConfettiActive] = useState(false);
   const [windowSize, setWindowSize] = useState({
@@ -38,15 +48,20 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   useEffect(() => {
     const fetchTasks = async () => {
       const querySnapshot = await getDocs(collection(db, "tasks"));
-      const taskList = {};
+      const loadedTasks = {};
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        if (!taskList[data.category]) {
-          taskList[data.category] = [];
+        if (!loadedTasks[data.category]) {
+          loadedTasks[data.category] = [];
         }
-        taskList[data.category].push({ id: doc.id, text: data.text, completed: data.completed });
+        loadedTasks[data.category].push({
+          id: doc.id,
+          text: data.text,
+          completed: data.completed,
+          priority: data.priority
+        });
       });
-      setTasks(taskList);
+      setTasks(loadedTasks);
     };
 
     fetchTasks();
@@ -55,7 +70,7 @@ const TodoList = ({ setHasUnsavedChanges }) => {
   useEffect(() => {
     localStorage.setItem("collapsedCategories", JSON.stringify(collapsed));
   }, [collapsed]);
-  
+
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
@@ -64,9 +79,9 @@ const TodoList = ({ setHasUnsavedChanges }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleCategory = (cat) => {
+  const toggleCategory = (category) => {
     setCollapsed((prev) => {
-      const updatedState = { ...prev, [cat]: !prev[cat] };
+      const updatedState = { ...prev, [category]: !prev[category] };
       localStorage.setItem("collapsedCategories", JSON.stringify(updatedState));
       return updatedState;
     });
@@ -74,125 +89,112 @@ const TodoList = ({ setHasUnsavedChanges }) => {
 
   const addTask = async (e) => {
     e.preventDefault();
-    if (!task.trim()) {
+    if (!taskText.trim()) {
       setError("Task cannot be empty!");
       setTimeout(() => setError(""), 2000);
       return;
     }
 
-    const newTask = { text: task, completed: false, category };
+    const newTask = {
+      text: taskText,
+      completed: false,
+      category: selectedCategory,
+      priority: selectedPriority
+    };
+
     const docRef = await addDoc(collection(db, "tasks"), newTask);
 
     setTasks((prevTasks) => ({
       ...prevTasks,
-      [category]: [...(prevTasks[category] || []), { id: docRef.id, ...newTask }]
+      [selectedCategory]: [...(prevTasks[selectedCategory] || []), { id: docRef.id, ...newTask }]
     }));
 
-    setTask("");
+    setTaskText("");
   };
 
-  const markTaskAsDone = async (cat, index) => {
-    const taskToUpdate = tasks[cat][index];
+  const toggleTaskCompletion = async (category, index) => {
+    const taskToUpdate = tasks[category][index];
     await updateDoc(doc(db, "tasks", taskToUpdate.id), { completed: !taskToUpdate.completed });
 
     setTasks((prevTasks) => ({
       ...prevTasks,
-      [cat]: prevTasks[cat].map((t, i) =>
-        i === index ? { ...t, completed: !t.completed } : t
+      [category]: prevTasks[category].map((task, i) =>
+        i === index ? { ...task, completed: !task.completed } : task
       )
     }));
 
-    // 🎉 Activate confetti effect when task is completed
     setConfettiActive(true);
     setTimeout(() => setConfettiActive(false), 5000);
   };
 
-  const removeTask = async (cat, index) => {
-    const taskToDelete = tasks[cat][index];
+  const deleteTask = async (category, index) => {
+    const taskToDelete = tasks[category][index];
     await deleteDoc(doc(db, "tasks", taskToDelete.id));
 
     setTasks((prevTasks) => ({
       ...prevTasks,
-      [cat]: prevTasks[cat].filter((_, i) => i !== index)
+      [category]: prevTasks[category].filter((_, i) => i !== index)
     }));
   };
 
-  const isTaskListEmpty = Object.values(tasks).every((taskArray) => taskArray.length === 0);
-
   return (
     <div className="todo-container">
-      {confettiActive && (
-        <Confetti
-          width={windowSize.width}
-          height={windowSize.height}
-          numberOfPieces={400} 
-          gravity={0.2} 
-          wind={0.025} 
-          tweenDuration={8000} 
-          recycle={false} 
-        />
-      )}
+      {confettiActive && <Confetti width={windowSize.width} height={windowSize.height} />}
 
       <form className="task-form" onSubmit={addTask}>
-        <input
-          type="text"
-          placeholder="Add a new task..."
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          className="task-input"
-        />
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="category-select"
-        >
-          {categories.map((cat) => (
-            <option key={cat.label} value={cat.label}>
-              {cat.emoji} {cat.label}
+        <input type="text" placeholder="Add a new task..." value={taskText} onChange={(e) => setTaskText(e.target.value)} className="task-input" />
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="category-select">
+          {categories.map((category) => (
+            <option key={category.label} value={category.label}>
+              {category.emoji} {category.label}
+            </option>
+          ))}
+        </select>
+        <select value={selectedPriority} onChange={(e) => setSelectedPriority(e.target.value)} className="priority-select">
+          {priorities.map((priority) => (
+            <option key={priority.label} value={priority.label}>
+              {priority.label}
             </option>
           ))}
         </select>
         <button type="submit" className="add-btn">➕ Add</button>
       </form>
 
-      {error && <p className="error-message">{error}</p>}
-
-      {isTaskListEmpty && <p className="no-tasks">🎉 No tasks for today! Enjoy your time! 🎉</p>}
-
       <div className="task-grid">
-        {categories.map((cat) => (
-          <div key={cat.label} className="task-column">
-            <h3 onClick={() => toggleCategory(cat.label)} className="category-title">
-              {cat.emoji} {cat.label} 
-              <span className="toggle-icon">
-                {collapsed[cat.label] ? "➕" : "➖"}
-              </span>
-            </h3>
-            {!collapsed[cat.label] && (
-              <ul className="task-list">
-                {(tasks[cat.label] || []).map((t, index) => (
-                  <li key={t.id} className={`task-item ${t.completed ? "completed" : ""}`}>
-                    <span className="task-text">{t.text}</span>
-                    <div className="task-actions">
-                      <button className="done-btn" onClick={() => markTaskAsDone(cat.label, index)}>
-                        {t.completed ? "✔️" : "✅"}
-                      </button>
-                      <button className="remove-btn shake" onClick={() => removeTask(cat.label, index)}>
-                        🗑️
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+        {Object.entries(tasks)
+          .filter(([_, taskList]) => taskList.length > 0)
+          .map(([category, taskList]) => (
+            <div key={category} className="task-column" data-category={category}>
+              <h3 onClick={() => toggleCategory(category)} className="category-title">
+                {categories.find((c) => c.label === category)?.emoji} {category}
+                <span className="toggle-icon">{collapsed[category] ? "➕" : "➖"}</span>
+              </h3>
+              {!collapsed[category] && (
+                <ul className="task-list">
+                  {taskList.map((task, index) => (
+                    <li key={task.id} className={`task-item ${task.completed ? "completed" : ""}`} data-priority={task.priority}>
+                      <span className="task-text">{task.text}</span>
+                      <div className="task-actions">
+                        <button className="done-btn" onClick={() => toggleTaskCompletion(category, index)}>
+                          {task.completed ? "✔️" : "✅"}
+                        </button>
+                        <button className="remove-btn" onClick={() => deleteTask(category, index)}>
+                          🗑️
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );
 };
 
 export default TodoList;
+
 
 
 
